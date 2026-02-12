@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-02-12T06:47:55.644Z",
+  "updatedAt": "2026-02-12T08:55:30.388Z",
   "createdAt": "2026-02-11T05:57:20.200Z",
   "id": "Xjp8LENLHU_yCNSZXMhMm",
   "name": "Basic RAG pipeline",
@@ -159,26 +159,6 @@
     },
     {
       "parameters": {
-        "model": "llama-3.3-70b-versatile",
-        "options": {}
-      },
-      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
-      "typeVersion": 1,
-      "position": [
-        1104,
-        400
-      ],
-      "id": "08b8bdf4-0e1b-40f6-a89e-e9a51ce41f9c",
-      "name": "Groq Chat Model",
-      "credentials": {
-        "groqApi": {
-          "id": "1sIBxBc8FUC1uXVG",
-          "name": "Groq account"
-        }
-      }
-    },
-    {
-      "parameters": {
         "content": "## RAG Data Ingestion\n**Upload files through form and store in the vector store",
         "height": 768,
         "width": 848,
@@ -227,7 +207,7 @@
           "convertFieldsToString": true
         },
         "options": {
-          "waitForSubWorkflow": false
+          "waitForSubWorkflow": true
         }
       },
       "type": "n8n-nodes-base.executeWorkflow",
@@ -238,6 +218,25 @@
       ],
       "id": "a6ce3746-a9d9-4475-9baa-e9f5e08ea681",
       "name": "Call 'git sync'"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        1104,
+        400
+      ],
+      "id": "a2aacb0e-ccee-431c-8e38-4b386a687273",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "QYLHsZYZCnpLyrql",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
     }
   ],
   "connections": {
@@ -323,23 +322,23 @@
         ]
       ]
     },
-    "Groq Chat Model": {
-      "ai_languageModel": [
-        [
-          {
-            "node": "AI Agent",
-            "type": "ai_languageModel",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "AI Agent": {
       "main": [
         [
           {
             "node": "Call 'git sync'",
             "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
             "index": 0
           }
         ]
@@ -356,9 +355,9 @@
     "templateCredsSetupCompleted": true
   },
   "pinData": {},
-  "versionId": "ca7d1051-e7a3-4646-ab18-942616fb246d",
+  "versionId": "73567797-ab11-4a2b-a0e2-bb311399dd3e",
   "activeVersionId": "79ee3555-46f0-46a4-a936-65476ad3d1b3",
-  "versionCounter": 25,
+  "versionCounter": 27,
   "triggerCount": 2,
   "shared": [
     {
