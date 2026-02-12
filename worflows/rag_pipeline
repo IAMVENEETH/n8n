@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-02-12T08:55:30.388Z",
+  "updatedAt": "2026-02-12T09:03:15.486Z",
   "createdAt": "2026-02-11T05:57:20.200Z",
   "id": "Xjp8LENLHU_yCNSZXMhMm",
   "name": "Basic RAG pipeline",
@@ -237,6 +237,81 @@
           "name": "Google Gemini(PaLM) Api account"
         }
       }
+    },
+    {
+      "parameters": {
+        "inputSource": "passthrough"
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        192,
+        912
+      ],
+      "id": "6696f77d-66c4-4b90-9d4c-cb17bd51cfd2",
+      "name": "When Executed by Another Workflow"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "workflowId": {
+          "__rl": true,
+          "value": "Xjp8LENLHU_yCNSZXMhMm",
+          "mode": "list",
+          "cachedResultName": "Basic RAG pipeline (#Xjp8LENLHU_yCNSZXMhMm)"
+        },
+        "requestOptions": {}
+      },
+      "type": "n8n-nodes-base.n8n",
+      "typeVersion": 1,
+      "position": [
+        432,
+        912
+      ],
+      "id": "36e17bac-99aa-4502-a2c0-6fc07f3e29fb",
+      "name": "Get a workflow",
+      "credentials": {
+        "n8nApi": {
+          "id": "K4Gqcoe79LwYQSN3",
+          "name": "n8n account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "operation": "edit",
+        "owner": {
+          "__rl": true,
+          "value": "https://github.com/IAMVENEETH",
+          "mode": "url"
+        },
+        "repository": {
+          "__rl": true,
+          "value": "n8n",
+          "mode": "list",
+          "cachedResultName": "n8n",
+          "cachedResultUrl": "https://github.com/IAMVENEETH/n8n"
+        },
+        "filePath": "worflows/rag_pipeline",
+        "fileContent": "={{ JSON.stringify($json, null, 2) }}",
+        "commitMessage": "=created new file "
+      },
+      "type": "n8n-nodes-base.github",
+      "typeVersion": 1.1,
+      "position": [
+        656,
+        912
+      ],
+      "id": "5a21ab68-7496-42eb-bab5-aa2c2e2ae06c",
+      "name": "Edit a file",
+      "webhookId": "ed9f3689-631c-4e1f-a578-307818c2e424",
+      "credentials": {
+        "githubApi": {
+          "id": "1bf24bS8EbVstfQv",
+          "name": "GitHub account"
+        }
+      }
     }
   ],
   "connections": {
@@ -343,6 +418,28 @@
           }
         ]
       ]
+    },
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "Get a workflow",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get a workflow": {
+      "main": [
+        [
+          {
+            "node": "Edit a file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "settings": {
@@ -355,9 +452,9 @@
     "templateCredsSetupCompleted": true
   },
   "pinData": {},
-  "versionId": "73567797-ab11-4a2b-a0e2-bb311399dd3e",
+  "versionId": "ab46e7cd-1d45-48b9-9b93-60bc38d6835a",
   "activeVersionId": "79ee3555-46f0-46a4-a936-65476ad3d1b3",
-  "versionCounter": 27,
+  "versionCounter": 29,
   "triggerCount": 2,
   "shared": [
     {
