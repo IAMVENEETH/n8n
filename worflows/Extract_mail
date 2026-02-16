@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-02-16T07:41:37.581Z",
+  "updatedAt": "2026-02-16T08:57:15.357Z",
   "createdAt": "2026-02-11T04:14:30.198Z",
   "id": "NKSgZKDRvHVY9U9VBm5mz",
   "name": "Extract_mail",
@@ -30,7 +30,7 @@
     },
     {
       "parameters": {
-        "jsCode": "// Map through every item received from the previous node\nreturn $input.all().map(item => {\n  try {\n    // 1. Parse the stringified 'text' field into a real object\n    const rawData = JSON.parse(item.json.text.trim());\n    \n    // The structure is an array inside a string, so we grab the first element\n    const data = rawData[0];\n\n    // 2. Extract load and stop objects\n    const load = data.load_details || {};\n    const stopsArray = data.all_stop_details || [];\n\n    // 3. Map the stops and attach load_id for database relational mapping\n    const formattedStops = stopsArray.map((stop) => ({\n      ...stop,\n      country: stop.country || \"USA\",\n      load_id: load.load_id \n    }));\n\n    // 4. Return the formatted object for this specific item\n    return {\n      json: {\n        load_id: load.load_id, // Useful for top-level reference\n        load_details: load,\n        all_stop_details: formattedStops\n      }\n    };\n\n  } catch (e) {\n    // Keep the error context for the specific failed item\n    return { \n      json: { \n        error: \"Parsing Failed\", \n        message: e.message, \n        original_data: item.json.text.substring(0, 50) + \"...\" \n      } \n    };\n  }\n});"
+        "jsCode": "return $input.all().map(item => {\n  try {\n    // 1. CLEAN THE DATA: Remove markdown backticks and the \"json\" label\n    // This regex looks for ```json (case insensitive) and the closing ```\n    const cleanedText = item.json.text\n      .replace(/```json/gi, \"\")\n      .replace(/```/g, \"\")\n      .trim();\n\n    // 2. Parse the now-clean string\n    const data = JSON.parse(cleanedText);\n    \n    // Note: In your example data, the object is NOT wrapped in an array [ ], \n    // it's a direct object { }. So we don't need rawData[0].\n    \n    // 3. Extract load and stop objects\n    const load = data.load_details || {};\n    const stopsArray = data.all_stop_details || [];\n\n    // 4. Map the stops\n    const formattedStops = stopsArray.map((stop) => ({\n      ...stop,\n      country: stop.country || \"USA\",\n      load_id: load.load_id \n    }));\n\n    return {\n      json: {\n        load_id: load.load_id,\n        load_details: load,\n        all_stop_details: formattedStops\n      }\n    };\n\n  } catch (e) {\n    return { \n      json: { \n        error: \"Parsing Failed\", \n        message: e.message, \n        original_data: item.json.text.substring(0, 50) + \"...\" \n      } \n    };\n  }\n});"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -450,26 +450,6 @@
     },
     {
       "parameters": {
-        "model": "llama-3.3-70b-versatile",
-        "options": {}
-      },
-      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
-      "typeVersion": 1,
-      "position": [
-        -576,
-        384
-      ],
-      "id": "9acc9201-939b-492a-806a-c6b9c4a26750",
-      "name": "Groq Chat Model",
-      "credentials": {
-        "groqApi": {
-          "id": "1sIBxBc8FUC1uXVG",
-          "name": "Groq account"
-        }
-      }
-    },
-    {
-      "parameters": {
         "operation": "getAll",
         "limit": 1,
         "simple": false,
@@ -494,18 +474,37 @@
     },
     {
       "parameters": {
-        "path": "74b1a26d-ac6c-43c5-9c8f-4da3e1e116ae",
+        "path": "ad16361a-8392-4ad5-b27f-dd96b2e9cdc7",
         "options": {}
       },
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        -1152,
+        -1136,
         144
       ],
-      "id": "8ee81985-0f42-44c9-93ca-d6ea09e33a13",
+      "id": "30014ca4-ca3b-4fb6-acad-ab24fe7b0c0a",
       "name": "Webhook",
-      "webhookId": "74b1a26d-ac6c-43c5-9c8f-4da3e1e116ae"
+      "webhookId": "ad16361a-8392-4ad5-b27f-dd96b2e9cdc7"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -576,
+        384
+      ],
+      "id": "e86fcc84-ebcd-43dc-963b-885c3928dfd3",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "QYLHsZYZCnpLyrql",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
     }
   ],
   "connections": {
@@ -563,17 +562,6 @@
         ]
       ]
     },
-    "Groq Chat Model": {
-      "ai_languageModel": [
-        [
-          {
-            "node": "Basic LLM Chain",
-            "type": "ai_languageModel",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Insert rows in a table": {
       "main": [
         []
@@ -600,6 +588,17 @@
           }
         ]
       ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "settings": {
@@ -612,8 +611,8 @@
     "templateCredsSetupCompleted": true
   },
   "pinData": {},
-  "versionId": "c711ce0d-4631-4800-bd49-0b04437f46d1",
-  "activeVersionId": "c711ce0d-4631-4800-bd49-0b04437f46d1",
+  "versionId": "4e5716ea-766f-4607-a830-cc98a88381ae",
+  "activeVersionId": "4e5716ea-766f-4607-a830-cc98a88381ae",
   "triggerCount": 1,
   "shared": [
     {
@@ -625,9 +624,9 @@
     }
   ],
   "activeVersion": {
-    "updatedAt": "2026-02-16T07:42:12.000Z",
-    "createdAt": "2026-02-16T07:41:37.583Z",
-    "versionId": "c711ce0d-4631-4800-bd49-0b04437f46d1",
+    "updatedAt": "2026-02-16T08:57:32.000Z",
+    "createdAt": "2026-02-16T08:57:11.947Z",
+    "versionId": "4e5716ea-766f-4607-a830-cc98a88381ae",
     "workflowId": "NKSgZKDRvHVY9U9VBm5mz",
     "nodes": [
       {
@@ -654,7 +653,7 @@
       },
       {
         "parameters": {
-          "jsCode": "// Map through every item received from the previous node\nreturn $input.all().map(item => {\n  try {\n    // 1. Parse the stringified 'text' field into a real object\n    const rawData = JSON.parse(item.json.text.trim());\n    \n    // The structure is an array inside a string, so we grab the first element\n    const data = rawData[0];\n\n    // 2. Extract load and stop objects\n    const load = data.load_details || {};\n    const stopsArray = data.all_stop_details || [];\n\n    // 3. Map the stops and attach load_id for database relational mapping\n    const formattedStops = stopsArray.map((stop) => ({\n      ...stop,\n      country: stop.country || \"USA\",\n      load_id: load.load_id \n    }));\n\n    // 4. Return the formatted object for this specific item\n    return {\n      json: {\n        load_id: load.load_id, // Useful for top-level reference\n        load_details: load,\n        all_stop_details: formattedStops\n      }\n    };\n\n  } catch (e) {\n    // Keep the error context for the specific failed item\n    return { \n      json: { \n        error: \"Parsing Failed\", \n        message: e.message, \n        original_data: item.json.text.substring(0, 50) + \"...\" \n      } \n    };\n  }\n});"
+          "jsCode": "return $input.all().map(item => {\n  try {\n    // 1. CLEAN THE DATA: Remove markdown backticks and the \"json\" label\n    // This regex looks for ```json (case insensitive) and the closing ```\n    const cleanedText = item.json.text\n      .replace(/```json/gi, \"\")\n      .replace(/```/g, \"\")\n      .trim();\n\n    // 2. Parse the now-clean string\n    const data = JSON.parse(cleanedText);\n    \n    // Note: In your example data, the object is NOT wrapped in an array [ ], \n    // it's a direct object { }. So we don't need rawData[0].\n    \n    // 3. Extract load and stop objects\n    const load = data.load_details || {};\n    const stopsArray = data.all_stop_details || [];\n\n    // 4. Map the stops\n    const formattedStops = stopsArray.map((stop) => ({\n      ...stop,\n      country: stop.country || \"USA\",\n      load_id: load.load_id \n    }));\n\n    return {\n      json: {\n        load_id: load.load_id,\n        load_details: load,\n        all_stop_details: formattedStops\n      }\n    };\n\n  } catch (e) {\n    return { \n      json: { \n        error: \"Parsing Failed\", \n        message: e.message, \n        original_data: item.json.text.substring(0, 50) + \"...\" \n      } \n    };\n  }\n});"
         },
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
@@ -1074,26 +1073,6 @@
       },
       {
         "parameters": {
-          "model": "llama-3.3-70b-versatile",
-          "options": {}
-        },
-        "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
-        "typeVersion": 1,
-        "position": [
-          -576,
-          384
-        ],
-        "id": "9acc9201-939b-492a-806a-c6b9c4a26750",
-        "name": "Groq Chat Model",
-        "credentials": {
-          "groqApi": {
-            "id": "1sIBxBc8FUC1uXVG",
-            "name": "Groq account"
-          }
-        }
-      },
-      {
-        "parameters": {
           "operation": "getAll",
           "limit": 1,
           "simple": false,
@@ -1118,18 +1097,37 @@
       },
       {
         "parameters": {
-          "path": "74b1a26d-ac6c-43c5-9c8f-4da3e1e116ae",
+          "path": "ad16361a-8392-4ad5-b27f-dd96b2e9cdc7",
           "options": {}
         },
         "type": "n8n-nodes-base.webhook",
         "typeVersion": 2.1,
         "position": [
-          -1152,
+          -1136,
           144
         ],
-        "id": "8ee81985-0f42-44c9-93ca-d6ea09e33a13",
+        "id": "30014ca4-ca3b-4fb6-acad-ab24fe7b0c0a",
         "name": "Webhook",
-        "webhookId": "74b1a26d-ac6c-43c5-9c8f-4da3e1e116ae"
+        "webhookId": "ad16361a-8392-4ad5-b27f-dd96b2e9cdc7"
+      },
+      {
+        "parameters": {
+          "options": {}
+        },
+        "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+        "typeVersion": 1,
+        "position": [
+          -576,
+          384
+        ],
+        "id": "e86fcc84-ebcd-43dc-963b-885c3928dfd3",
+        "name": "Google Gemini Chat Model",
+        "credentials": {
+          "googlePalmApi": {
+            "id": "QYLHsZYZCnpLyrql",
+            "name": "Google Gemini(PaLM) Api account"
+          }
+        }
       }
     ],
     "connections": {
@@ -1187,17 +1185,6 @@
           ]
         ]
       },
-      "Groq Chat Model": {
-        "ai_languageModel": [
-          [
-            {
-              "node": "Basic LLM Chain",
-              "type": "ai_languageModel",
-              "index": 0
-            }
-          ]
-        ]
-      },
       "Insert rows in a table": {
         "main": [
           []
@@ -1224,10 +1211,21 @@
             }
           ]
         ]
+      },
+      "Google Gemini Chat Model": {
+        "ai_languageModel": [
+          [
+            {
+              "node": "Basic LLM Chain",
+              "type": "ai_languageModel",
+              "index": 0
+            }
+          ]
+        ]
       }
     },
     "authors": "Veneeth Batchu",
-    "name": "Version c711ce0d",
+    "name": "Version 4e5716ea",
     "description": "",
     "autosaved": true
   },
