@@ -1230,7 +1230,10 @@
     "autosaved": true
   },
   "tags": [],
-  "existsInGitHub": false,
-  "githubDownloadUrl": null,
-  "githubSha": null
+  "existsInGitHub": true,
+  "githubDownloadUrl": "https://raw.githubusercontent.com/IAMVENEETH/n8n/main/Extract_mail",
+  "githubSha": "d0d5f599dea0ed7dae2f1603e8abf0535b5ef5c2",
+  "shouldUpdate": true,
+  "n8nUpdatedAt": "2026-02-16T10:24:41.988Z",
+  "githubUpdatedAt": null
 }
