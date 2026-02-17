@@ -1,0 +1,652 @@
+{
+  "updatedAt": "2026-02-16T13:55:51.451Z",
+  "createdAt": "2026-02-11T05:57:20.200Z",
+  "id": "Xjp8LENLHU_yCNSZXMhMm",
+  "name": "Basic RAG pipeline",
+  "active": true,
+  "isArchived": false,
+  "nodes": [
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "You are a retrieval-augmented assistant.\nAlways call the retrieval tool before answering document-based questions.\nDo not answer from general knowledge.\nIf retrieval returns nothing relevant, say so."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        1232,
+        192
+      ],
+      "id": "8e61dd40-3ed2-4b09-92e7-2a506228e06d",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        1280,
+        432
+      ],
+      "id": "2817c39f-8c15-4636-ba2b-5da49e2b20b8",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "formTitle": "Data Ingestion",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "ingest file",
+              "fieldType": "file",
+              "acceptFileTypes": ".pdf",
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.5,
+      "position": [
+        208,
+        80
+      ],
+      "id": "0df8aab1-978f-4de7-8959-69c576765bbe",
+      "name": "On form submission",
+      "webhookId": "dbb255ff-2a9b-4f53-8580-66843320990f"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        976,
+        208
+      ],
+      "id": "3adffa70-1547-4b8d-94fb-209d81056297",
+      "name": "When chat message received",
+      "webhookId": "9772aca0-d6be-42a4-92f3-9fc8be8bfddc"
+    },
+    {
+      "parameters": {
+        "mode": "retrieve-as-tool",
+        "toolDescription": "use this tool to retrieve knowledge from database",
+        "memoryKey": {
+          "__rl": true,
+          "value": "rag_chatbot",
+          "mode": "id"
+        },
+        "topK": 5
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreInMemory",
+      "typeVersion": 1.3,
+      "position": [
+        1408,
+        544
+      ],
+      "id": "542d1afa-52a7-4372-92da-7a64c4c95687",
+      "name": "Simple Vector Store1"
+    },
+    {
+      "parameters": {
+        "mode": "insert",
+        "memoryKey": {
+          "__rl": true,
+          "value": "rag_chatbot",
+          "mode": "id"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreInMemory",
+      "typeVersion": 1.3,
+      "position": [
+        496,
+        80
+      ],
+      "id": "18717ed0-821b-403c-9e89-6a5fdaa93e61",
+      "name": "Simple Vector Store"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.embeddingsCohere",
+      "typeVersion": 1,
+      "position": [
+        320,
+        272
+      ],
+      "id": "7330e47a-4060-4366-8256-af7aa821597d",
+      "name": "Embeddings Cohere",
+      "credentials": {
+        "cohereApi": {
+          "id": "QVRi8lh0rJdPoKaI",
+          "name": "CohereApi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "dataType": "binary",
+        "textSplittingMode": "custom",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+      "typeVersion": 1.1,
+      "position": [
+        464,
+        400
+      ],
+      "id": "bd373fb3-f529-4823-bc3b-48b78bd88c03",
+      "name": "Default Data Loader"
+    },
+    {
+      "parameters": {
+        "chunkSize": 400,
+        "chunkOverlap": 100,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.textSplitterRecursiveCharacterTextSplitter",
+      "typeVersion": 1,
+      "position": [
+        464,
+        608
+      ],
+      "id": "4295061d-9598-4d70-a60c-ff3b5de045c1",
+      "name": "Recursive Character Text Splitter"
+    },
+    {
+      "parameters": {
+        "content": "## RAG Data Ingestion\n**Upload files through form and store in the vector store",
+        "height": 768,
+        "width": 848,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        0,
+        0
+      ],
+      "typeVersion": 1,
+      "id": "62693628-1117-47b7-a830-7ed0f5aa6e1b",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "## RAG workflow\nThe workflow triggered when new chat message is sent and retrieve the relevent chunks from vector store based on the embeddings,therefore use them to answer the user query",
+        "height": 768,
+        "width": 960,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        896,
+        0
+      ],
+      "typeVersion": 1,
+      "id": "12520767-91b3-41cc-8347-0e49c2441e1f",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "model": "llama-3.3-70b-versatile",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "position": [
+        1104,
+        416
+      ],
+      "id": "477c9d38-728e-445b-ad56-68a37d4afd5a",
+      "name": "Groq Chat Model",
+      "credentials": {
+        "groqApi": {
+          "id": "1sIBxBc8FUC1uXVG",
+          "name": "Groq account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "Simple Vector Store",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Vector Store1": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings Cohere": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Simple Vector Store",
+            "type": "ai_embedding",
+            "index": 0
+          },
+          {
+            "node": "Simple Vector Store1",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Default Data Loader": {
+      "ai_document": [
+        [
+          {
+            "node": "Simple Vector Store",
+            "type": "ai_document",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Recursive Character Text Splitter": {
+      "ai_textSplitter": [
+        [
+          {
+            "node": "Default Data Loader",
+            "type": "ai_textSplitter",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        []
+      ]
+    },
+    "Groq Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {},
+  "versionId": "f566bf66-baf6-4ea1-a511-28cc2a7d51aa",
+  "activeVersionId": "f566bf66-baf6-4ea1-a511-28cc2a7d51aa",
+  "triggerCount": 2,
+  "shared": [
+    {
+      "updatedAt": "2026-02-11T05:57:20.208Z",
+      "createdAt": "2026-02-11T05:57:20.208Z",
+      "role": "workflow:owner",
+      "workflowId": "Xjp8LENLHU_yCNSZXMhMm",
+      "projectId": "xYFaUA8eDj6pQBYB"
+    }
+  ],
+  "activeVersion": {
+    "updatedAt": "2026-02-17T05:20:47.000Z",
+    "createdAt": "2026-02-16T13:55:51.452Z",
+    "versionId": "f566bf66-baf6-4ea1-a511-28cc2a7d51aa",
+    "workflowId": "Xjp8LENLHU_yCNSZXMhMm",
+    "nodes": [
+      {
+        "parameters": {
+          "options": {
+            "systemMessage": "You are a retrieval-augmented assistant.\nAlways call the retrieval tool before answering document-based questions.\nDo not answer from general knowledge.\nIf retrieval returns nothing relevant, say so."
+          }
+        },
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "typeVersion": 3.1,
+        "position": [
+          1232,
+          192
+        ],
+        "id": "8e61dd40-3ed2-4b09-92e7-2a506228e06d",
+        "name": "AI Agent"
+      },
+      {
+        "parameters": {},
+        "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+        "typeVersion": 1.3,
+        "position": [
+          1280,
+          432
+        ],
+        "id": "2817c39f-8c15-4636-ba2b-5da49e2b20b8",
+        "name": "Simple Memory"
+      },
+      {
+        "parameters": {
+          "formTitle": "Data Ingestion",
+          "formFields": {
+            "values": [
+              {
+                "fieldLabel": "ingest file",
+                "fieldType": "file",
+                "acceptFileTypes": ".pdf",
+                "requiredField": true
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.formTrigger",
+        "typeVersion": 2.5,
+        "position": [
+          208,
+          80
+        ],
+        "id": "0df8aab1-978f-4de7-8959-69c576765bbe",
+        "name": "On form submission",
+        "webhookId": "dbb255ff-2a9b-4f53-8580-66843320990f"
+      },
+      {
+        "parameters": {
+          "options": {}
+        },
+        "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+        "typeVersion": 1.4,
+        "position": [
+          976,
+          208
+        ],
+        "id": "3adffa70-1547-4b8d-94fb-209d81056297",
+        "name": "When chat message received",
+        "webhookId": "9772aca0-d6be-42a4-92f3-9fc8be8bfddc"
+      },
+      {
+        "parameters": {
+          "mode": "retrieve-as-tool",
+          "toolDescription": "use this tool to retrieve knowledge from database",
+          "memoryKey": {
+            "__rl": true,
+            "value": "rag_chatbot",
+            "mode": "id"
+          },
+          "topK": 5
+        },
+        "type": "@n8n/n8n-nodes-langchain.vectorStoreInMemory",
+        "typeVersion": 1.3,
+        "position": [
+          1408,
+          544
+        ],
+        "id": "542d1afa-52a7-4372-92da-7a64c4c95687",
+        "name": "Simple Vector Store1"
+      },
+      {
+        "parameters": {
+          "mode": "insert",
+          "memoryKey": {
+            "__rl": true,
+            "value": "rag_chatbot",
+            "mode": "id"
+          }
+        },
+        "type": "@n8n/n8n-nodes-langchain.vectorStoreInMemory",
+        "typeVersion": 1.3,
+        "position": [
+          496,
+          80
+        ],
+        "id": "18717ed0-821b-403c-9e89-6a5fdaa93e61",
+        "name": "Simple Vector Store"
+      },
+      {
+        "parameters": {},
+        "type": "@n8n/n8n-nodes-langchain.embeddingsCohere",
+        "typeVersion": 1,
+        "position": [
+          320,
+          272
+        ],
+        "id": "7330e47a-4060-4366-8256-af7aa821597d",
+        "name": "Embeddings Cohere",
+        "credentials": {
+          "cohereApi": {
+            "id": "QVRi8lh0rJdPoKaI",
+            "name": "CohereApi account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "dataType": "binary",
+          "textSplittingMode": "custom",
+          "options": {}
+        },
+        "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+        "typeVersion": 1.1,
+        "position": [
+          464,
+          400
+        ],
+        "id": "bd373fb3-f529-4823-bc3b-48b78bd88c03",
+        "name": "Default Data Loader"
+      },
+      {
+        "parameters": {
+          "chunkSize": 400,
+          "chunkOverlap": 100,
+          "options": {}
+        },
+        "type": "@n8n/n8n-nodes-langchain.textSplitterRecursiveCharacterTextSplitter",
+        "typeVersion": 1,
+        "position": [
+          464,
+          608
+        ],
+        "id": "4295061d-9598-4d70-a60c-ff3b5de045c1",
+        "name": "Recursive Character Text Splitter"
+      },
+      {
+        "parameters": {
+          "content": "## RAG Data Ingestion\n**Upload files through form and store in the vector store",
+          "height": 768,
+          "width": 848,
+          "color": 3
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "position": [
+          0,
+          0
+        ],
+        "typeVersion": 1,
+        "id": "62693628-1117-47b7-a830-7ed0f5aa6e1b",
+        "name": "Sticky Note"
+      },
+      {
+        "parameters": {
+          "content": "## RAG workflow\nThe workflow triggered when new chat message is sent and retrieve the relevent chunks from vector store based on the embeddings,therefore use them to answer the user query",
+          "height": 768,
+          "width": 960,
+          "color": 4
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "position": [
+          896,
+          0
+        ],
+        "typeVersion": 1,
+        "id": "12520767-91b3-41cc-8347-0e49c2441e1f",
+        "name": "Sticky Note1"
+      },
+      {
+        "parameters": {
+          "model": "llama-3.3-70b-versatile",
+          "options": {}
+        },
+        "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+        "typeVersion": 1,
+        "position": [
+          1104,
+          416
+        ],
+        "id": "477c9d38-728e-445b-ad56-68a37d4afd5a",
+        "name": "Groq Chat Model",
+        "credentials": {
+          "groqApi": {
+            "id": "1sIBxBc8FUC1uXVG",
+            "name": "Groq account"
+          }
+        }
+      }
+    ],
+    "connections": {
+      "Simple Memory": {
+        "ai_memory": [
+          [
+            {
+              "node": "AI Agent",
+              "type": "ai_memory",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "On form submission": {
+        "main": [
+          [
+            {
+              "node": "Simple Vector Store",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "When chat message received": {
+        "main": [
+          [
+            {
+              "node": "AI Agent",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Simple Vector Store1": {
+        "ai_tool": [
+          [
+            {
+              "node": "AI Agent",
+              "type": "ai_tool",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Embeddings Cohere": {
+        "ai_embedding": [
+          [
+            {
+              "node": "Simple Vector Store",
+              "type": "ai_embedding",
+              "index": 0
+            },
+            {
+              "node": "Simple Vector Store1",
+              "type": "ai_embedding",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Default Data Loader": {
+        "ai_document": [
+          [
+            {
+              "node": "Simple Vector Store",
+              "type": "ai_document",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Recursive Character Text Splitter": {
+        "ai_textSplitter": [
+          [
+            {
+              "node": "Default Data Loader",
+              "type": "ai_textSplitter",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "AI Agent": {
+        "main": [
+          []
+        ]
+      },
+      "Groq Chat Model": {
+        "ai_languageModel": [
+          [
+            {
+              "node": "AI Agent",
+              "type": "ai_languageModel",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "Veneeth Batchu",
+    "name": "Version f566bf66",
+    "description": "",
+    "autosaved": true
+  },
+  "tags": [],
+  "existsInGitHub": false,
+  "githubDownloadUrl": null,
+  "githubSha": null
+}
