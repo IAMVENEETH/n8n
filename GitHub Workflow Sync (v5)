@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-02-18T09:17:15.049Z",
+  "updatedAt": "2026-02-18T09:58:09.665Z",
   "createdAt": "2026-02-11T15:54:16.658Z",
   "id": "DRkxG3Wzq9tqxVXr-AOhW",
   "name": "GitHub Workflow Sync (v5)",
@@ -2136,10 +2136,10 @@
       "parameters": {
         "workflowId": {
           "__rl": true,
-          "value": "Xf6LDtnYGZml6Iwz",
+          "value": "X-wT_vtL2P-dm1bxgloN1",
           "mode": "list",
-          "cachedResultUrl": "/workflow/Xf6LDtnYGZml6Iwz",
-          "cachedResultName": "spreadsheet"
+          "cachedResultUrl": "/workflow/X-wT_vtL2P-dm1bxgloN1",
+          "cachedResultName": "Import workflows from git"
         },
         "workflowInputs": {
           "mappingMode": "defineBelow",
@@ -2156,10 +2156,10 @@
       "typeVersion": 1.3,
       "position": [
         336,
-        4032
+        4000
       ],
       "id": "a0b01259-f973-4ccb-bd81-97cac4cbfda4",
-      "name": "Call 'My Sub-Workflow 3'"
+      "name": "Call 'Import workflows from git'"
     }
   ],
   "connections": {
@@ -2986,7 +2986,7 @@
       "main": [
         [
           {
-            "node": "Call 'My Sub-Workflow 3'",
+            "node": "Call 'Import workflows from git'",
             "type": "main",
             "index": 0
           }
@@ -3004,7 +3004,7 @@
       "main": [
         [
           {
-            "node": "Call 'My Sub-Workflow 3'",
+            "node": "Call 'Import workflows from git'",
             "type": "main",
             "index": 0
           }
@@ -3022,7 +3022,7 @@
     "templateCredsSetupCompleted": true
   },
   "pinData": {},
-  "versionId": "3129b794-3c7a-45c3-b026-ad9423b29282",
+  "versionId": "ff680c88-da9a-462e-9371-66e9c8f5c88e",
   "activeVersionId": "fc24041c-72fa-42f3-b981-96fb78b42cd5",
   "triggerCount": 8,
   "shared": [
@@ -5975,5 +5975,5 @@
   },
   "tags": [],
   "existsInGitHub": true,
-  "githubSha": "52b9e294dc2b22a93b4606009345dfe0275b384b"
+  "githubSha": "815fe7edb853eeee1947ea2c5135710f71401622"
 }
