@@ -1,0 +1,130 @@
+{
+  "updatedAt": "2026-02-18T09:18:02.041Z",
+  "createdAt": "2026-02-18T05:23:24.940Z",
+  "id": "Xf6LDtnYGZml6Iwz",
+  "name": "spreadsheet",
+  "active": true,
+  "isArchived": false,
+  "nodes": [
+    {
+      "parameters": {
+        "inputSource": "passthrough"
+      },
+      "id": "c055762a-8fe7-4141-a639-df2372f30060",
+      "typeVersion": 1.1,
+      "name": "When Executed by Another Workflow",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "position": [
+        -160,
+        240
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        },
+        "sheetName": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        }
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        160,
+        240
+      ],
+      "id": "a4f9b33b-cfe5-4917-b1d2-90928d8f5b95",
+      "name": "Append or update row in sheet"
+    }
+  ],
+  "connections": {
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "Append or update row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "staticData": null,
+  "meta": null,
+  "pinData": {},
+  "versionId": "98a2cf17-9e2d-4c5a-be15-81d2fd13f073",
+  "activeVersionId": "7e126242-ed2d-4d0f-8d35-76f1eb0cd096",
+  "triggerCount": 0,
+  "shared": [
+    {
+      "updatedAt": "2026-02-18T05:23:24.947Z",
+      "createdAt": "2026-02-18T05:23:24.947Z",
+      "role": "workflow:owner",
+      "workflowId": "Xf6LDtnYGZml6Iwz",
+      "projectId": "xYFaUA8eDj6pQBYB"
+    }
+  ],
+  "activeVersion": {
+    "updatedAt": "2026-02-18T05:24:09.000Z",
+    "createdAt": "2026-02-18T05:23:33.478Z",
+    "versionId": "7e126242-ed2d-4d0f-8d35-76f1eb0cd096",
+    "workflowId": "Xf6LDtnYGZml6Iwz",
+    "nodes": [
+      {
+        "parameters": {
+          "inputSource": "passthrough"
+        },
+        "id": "c055762a-8fe7-4141-a639-df2372f30060",
+        "typeVersion": 1.1,
+        "name": "When Executed by Another Workflow",
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "position": [
+          272,
+          352
+        ]
+      },
+      {
+        "parameters": {},
+        "id": "b5942df6-0160-4ef7-965d-57583acdc8aa",
+        "name": "Replace me with your logic",
+        "type": "n8n-nodes-base.noOp",
+        "position": [
+          528,
+          352
+        ]
+      }
+    ],
+    "connections": {
+      "When Executed by Another Workflow": {
+        "main": [
+          [
+            {
+              "node": "Replace me with your logic",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "Veneeth Batchu",
+    "name": "Version 7e126242",
+    "description": "",
+    "autosaved": true
+  },
+  "tags": [],
+  "existsInGitHub": false,
+  "githubDownloadUrl": null,
+  "githubSha": null
+}
