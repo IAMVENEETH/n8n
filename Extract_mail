@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-02-16T10:24:41.988Z",
+  "updatedAt": "2026-02-18T05:32:14.041Z",
   "createdAt": "2026-02-11T04:14:30.198Z",
   "id": "NKSgZKDRvHVY9U9VBm5mz",
   "name": "Extract_mail",
@@ -489,20 +489,65 @@
     },
     {
       "parameters": {
+        "events": [
+          "activate",
+          "update"
+        ]
+      },
+      "type": "n8n-nodes-base.n8nTrigger",
+      "typeVersion": 1,
+      "position": [
+        -560,
+        656
+      ],
+      "id": "dbe31058-b625-44d3-991e-23fd2b843b59",
+      "name": "n8n Trigger"
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "Xf6LDtnYGZml6Iwz",
+          "mode": "list",
+          "cachedResultName": "My Sub-Workflow 3",
+          "cachedResultUrl": "/workflow/Xf6LDtnYGZml6Iwz"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
         "options": {}
       },
-      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.3,
+      "position": [
+        -352,
+        656
+      ],
+      "id": "a3ee56a2-1795-4619-907c-4d44562cf94e",
+      "name": "Execute Workflow"
+    },
+    {
+      "parameters": {
+        "model": "llama-3.3-70b-versatile",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
       "typeVersion": 1,
       "position": [
         -576,
         384
       ],
-      "id": "c234b947-566a-4f2f-a134-1eec8dd4fc12",
-      "name": "Google Gemini Chat Model",
+      "id": "a57161a0-e9c0-46d2-b615-f7826842be68",
+      "name": "Groq Chat Model",
       "credentials": {
-        "googlePalmApi": {
-          "id": "QYLHsZYZCnpLyrql",
-          "name": "Google Gemini(PaLM) Api account"
+        "groqApi": {
+          "id": "1sIBxBc8FUC1uXVG",
+          "name": "Groq account"
         }
       }
     }
@@ -589,7 +634,18 @@
         ]
       ]
     },
-    "Google Gemini Chat Model": {
+    "n8n Trigger": {
+      "main": [
+        [
+          {
+            "node": "Execute Workflow",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq Chat Model": {
       "ai_languageModel": [
         [
           {
@@ -611,9 +667,9 @@
     "templateCredsSetupCompleted": true
   },
   "pinData": {},
-  "versionId": "a1a7d0df-102e-4aff-9aa1-7796b6262762",
-  "activeVersionId": "a1a7d0df-102e-4aff-9aa1-7796b6262762",
-  "triggerCount": 1,
+  "versionId": "ed5df60c-3787-4ff8-922b-57d173c35bd1",
+  "activeVersionId": "ed5df60c-3787-4ff8-922b-57d173c35bd1",
+  "triggerCount": 2,
   "shared": [
     {
       "updatedAt": "2026-02-11T04:14:30.204Z",
@@ -624,9 +680,9 @@
     }
   ],
   "activeVersion": {
-    "updatedAt": "2026-02-16T10:24:45.000Z",
-    "createdAt": "2026-02-16T10:24:41.988Z",
-    "versionId": "a1a7d0df-102e-4aff-9aa1-7796b6262762",
+    "updatedAt": "2026-02-18T05:32:26.000Z",
+    "createdAt": "2026-02-18T05:32:14.042Z",
+    "versionId": "ed5df60c-3787-4ff8-922b-57d173c35bd1",
     "workflowId": "NKSgZKDRvHVY9U9VBm5mz",
     "nodes": [
       {
@@ -1112,20 +1168,65 @@
       },
       {
         "parameters": {
+          "events": [
+            "activate",
+            "update"
+          ]
+        },
+        "type": "n8n-nodes-base.n8nTrigger",
+        "typeVersion": 1,
+        "position": [
+          -560,
+          656
+        ],
+        "id": "dbe31058-b625-44d3-991e-23fd2b843b59",
+        "name": "n8n Trigger"
+      },
+      {
+        "parameters": {
+          "workflowId": {
+            "__rl": true,
+            "value": "Xf6LDtnYGZml6Iwz",
+            "mode": "list",
+            "cachedResultName": "My Sub-Workflow 3",
+            "cachedResultUrl": "/workflow/Xf6LDtnYGZml6Iwz"
+          },
+          "workflowInputs": {
+            "mappingMode": "defineBelow",
+            "value": {},
+            "matchingColumns": [],
+            "schema": [],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": true
+          },
           "options": {}
         },
-        "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+        "type": "n8n-nodes-base.executeWorkflow",
+        "typeVersion": 1.3,
+        "position": [
+          -352,
+          656
+        ],
+        "id": "a3ee56a2-1795-4619-907c-4d44562cf94e",
+        "name": "Execute Workflow"
+      },
+      {
+        "parameters": {
+          "model": "llama-3.3-70b-versatile",
+          "options": {}
+        },
+        "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
         "typeVersion": 1,
         "position": [
           -576,
           384
         ],
-        "id": "c234b947-566a-4f2f-a134-1eec8dd4fc12",
-        "name": "Google Gemini Chat Model",
+        "id": "a57161a0-e9c0-46d2-b615-f7826842be68",
+        "name": "Groq Chat Model",
         "credentials": {
-          "googlePalmApi": {
-            "id": "QYLHsZYZCnpLyrql",
-            "name": "Google Gemini(PaLM) Api account"
+          "groqApi": {
+            "id": "1sIBxBc8FUC1uXVG",
+            "name": "Groq account"
           }
         }
       }
@@ -1212,7 +1313,18 @@
           ]
         ]
       },
-      "Google Gemini Chat Model": {
+      "n8n Trigger": {
+        "main": [
+          [
+            {
+              "node": "Execute Workflow",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Groq Chat Model": {
         "ai_languageModel": [
           [
             {
@@ -1225,15 +1337,11 @@
       }
     },
     "authors": "Veneeth Batchu",
-    "name": "Version a1a7d0df",
+    "name": "Version ed5df60c",
     "description": "",
     "autosaved": true
   },
   "tags": [],
   "existsInGitHub": true,
-  "githubDownloadUrl": "https://raw.githubusercontent.com/IAMVENEETH/n8n/main/Extract_mail",
-  "githubSha": "d0d5f599dea0ed7dae2f1603e8abf0535b5ef5c2",
-  "shouldUpdate": true,
-  "n8nUpdatedAt": "2026-02-16T10:24:41.988Z",
-  "githubUpdatedAt": null
+  "githubSha": "b3aa1179df244c5a10ac91650a931de8440c666b"
 }
