@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-02-18T09:49:22.043Z",
+  "updatedAt": "2026-02-18T09:58:09.665Z",
   "createdAt": "2026-02-11T15:54:16.658Z",
   "id": "DRkxG3Wzq9tqxVXr-AOhW",
   "name": "GitHub Workflow Sync (v5)",
@@ -2136,10 +2136,10 @@
       "parameters": {
         "workflowId": {
           "__rl": true,
-          "value": "Xf6LDtnYGZml6Iwz",
+          "value": "X-wT_vtL2P-dm1bxgloN1",
           "mode": "list",
-          "cachedResultUrl": "/workflow/Xf6LDtnYGZml6Iwz",
-          "cachedResultName": "spreadsheet"
+          "cachedResultUrl": "/workflow/X-wT_vtL2P-dm1bxgloN1",
+          "cachedResultName": "Import workflows from git"
         },
         "workflowInputs": {
           "mappingMode": "defineBelow",
@@ -2159,7 +2159,7 @@
         4000
       ],
       "id": "a0b01259-f973-4ccb-bd81-97cac4cbfda4",
-      "name": "Call 'My Sub-Workflow 3'"
+      "name": "Call 'Import workflows from git'"
     }
   ],
   "connections": {
@@ -2986,7 +2986,7 @@
       "main": [
         [
           {
-            "node": "Call 'My Sub-Workflow 3'",
+            "node": "Call 'Import workflows from git'",
             "type": "main",
             "index": 0
           }
@@ -3004,7 +3004,7 @@
       "main": [
         [
           {
-            "node": "Call 'My Sub-Workflow 3'",
+            "node": "Call 'Import workflows from git'",
             "type": "main",
             "index": 0
           }
@@ -3022,7 +3022,7 @@
     "templateCredsSetupCompleted": true
   },
   "pinData": {},
-  "versionId": "436d5057-1e8b-4202-98db-6fd620e98aae",
+  "versionId": "ff680c88-da9a-462e-9371-66e9c8f5c88e",
   "activeVersionId": "fc24041c-72fa-42f3-b981-96fb78b42cd5",
   "triggerCount": 8,
   "shared": [
@@ -5976,7 +5976,7 @@
   "tags": [],
   "existsInGitHub": true,
   "githubDownloadUrl": "https://raw.githubusercontent.com/IAMVENEETH/n8n/main/GitHub%20Workflow%20Sync%20(v5)",
-  "githubSha": "ca0217754f72c10aa21544a346df46b6959d768d",
+  "githubSha": "268ca76a74828ae560ff8acd08cafec7bad36262",
   "shouldUpdate": true,
-  "githubUpdatedAt": "2026-02-18T09:17:15.049Z"
+  "githubUpdatedAt": "2026-02-18T09:49:22.043Z"
 }
