@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-02-18T09:08:11.512Z",
+  "updatedAt": "2026-02-18T09:14:56.606Z",
   "createdAt": "2026-02-11T15:54:16.658Z",
   "id": "DRkxG3Wzq9tqxVXr-AOhW",
   "name": "GitHub Workflow Sync (v5)",
@@ -1855,7 +1855,7 @@
     },
     {
       "parameters": {
-        "jsCode": "// ─────────────────────────────────────────────────────────────\n// Runs ONCE. Pulls:\n//   - all n8n workflows from 'Get All n8n Workflows'\n//   - the fileMap from 'Build GitHub File Map' (this node's input)\n// Filters out inactive + excluded workflows, then annotates\n// each with its GitHub match. Outputs one item per workflow.\n// ─────────────────────────────────────────────────────────────\n\nconst excludeList = [\n  'git_push_sync',\n  'monitoring_workflow',\n  'GitHub Workflow Sync (v5)',\n  'My Sub-Workflow 3'\n];\n\n// fileMap comes in as this node's single input item\nconst fileMap = $input.first().json.fileMap || {};\n\n// All n8n workflows from the earlier node\nconst allWorkflows = $('Get All n8n Workflows5').all();\n\nconst output = [];\nfor (const item of allWorkflows) {\n  const wf = item.json;\n\n  // Apply filters\n  if (!wf.active) continue;\n  if (excludeList.includes(wf.name)) continue;\n\n  // Annotate with GitHub match info\n  const match = fileMap[wf.name] || null;\n  output.push({\n    json: {\n      ...wf,\n      existsInGitHub: !!match,\n      githubDownloadUrl: match ? match.download_url : null,\n      githubSha: match ? match.sha : null\n    }\n  });\n}\n\nreturn output;"
+        "jsCode": "// ─────────────────────────────────────────────────────────────\n// Runs ONCE. Pulls:\n//   - all n8n workflows from 'Get All n8n Workflows'\n//   - the fileMap from 'Build GitHub File Map' (this node's input)\n// Filters out inactive + excluded workflows, then annotates\n// each with its GitHub match. Outputs one item per workflow.\n// ─────────────────────────────────────────────────────────────\n\nconst excludeList = [\n  'git_push_sync',\n  'monitoring_workflow',\n];\n\n// fileMap comes in as this node's single input item\nconst fileMap = $input.first().json.fileMap || {};\n\n// All n8n workflows from the earlier node\nconst allWorkflows = $('Get All n8n Workflows5').all();\n\nconst output = [];\nfor (const item of allWorkflows) {\n  const wf = item.json;\n\n  // Apply filters\n  if (!wf.active) continue;\n  if (excludeList.includes(wf.name)) continue;\n\n  // Annotate with GitHub match info\n  const match = fileMap[wf.name] || null;\n  output.push({\n    json: {\n      ...wf,\n      existsInGitHub: !!match,\n      githubDownloadUrl: match ? match.download_url : null,\n      githubSha: match ? match.sha : null\n    }\n  });\n}\n\nreturn output;"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -1968,8 +1968,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -16,
-        4160
+        208,
+        4272
       ],
       "id": "312ff9d9-2b9a-4c8e-b143-a73dbf776e09",
       "name": "HTTP Request2",
@@ -2009,8 +2009,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        208,
-        4160
+        432,
+        4272
       ],
       "id": "427957c9-d9d0-41f0-aacd-5e609dd3547e",
       "name": "Should Update?6"
@@ -2043,8 +2043,8 @@
       "type": "n8n-nodes-base.github",
       "typeVersion": 1.1,
       "position": [
-        432,
-        4016
+        736,
+        4256
       ],
       "id": "559bf9ac-f1fd-40e5-b330-870a450c1fcd",
       "name": "Edit Existing File6",
@@ -2117,6 +2117,20 @@
           "name": "GitHub account"
         }
       }
+    },
+    {
+      "parameters": {
+        "batchSize": "={{ $input.all().length}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        -64,
+        4256
+      ],
+      "id": "af4fd7f0-0b4a-433c-b037-87a6542165a3",
+      "name": "Loop Over Items"
     }
   ],
   "connections": {
@@ -2881,7 +2895,7 @@
       "main": [
         [
           {
-            "node": "HTTP Request2",
+            "node": "Loop Over Items",
             "type": "main",
             "index": 0
           }
@@ -2930,7 +2944,25 @@
     },
     "Edit Existing File6": {
       "main": [
-        []
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "HTTP Request2",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     }
   },
@@ -2944,7 +2976,7 @@
     "templateCredsSetupCompleted": true
   },
   "pinData": {},
-  "versionId": "2647e609-5052-4a8d-8e79-3f622e2c26ae",
+  "versionId": "4656d836-796d-4a90-b831-aecaafac7153",
   "activeVersionId": "fc24041c-72fa-42f3-b981-96fb78b42cd5",
   "triggerCount": 8,
   "shared": [
@@ -5897,5 +5929,5 @@
   },
   "tags": [],
   "existsInGitHub": true,
-  "githubSha": "f0e4db7e4645ca66574ecf1c8bebae0d6a6cccf0"
+  "githubSha": "ef8152451b9282fd3be1d3fd72b4ed31f3d9fc7f"
 }
