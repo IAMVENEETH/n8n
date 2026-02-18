@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-02-18T05:32:14.041Z",
+  "updatedAt": "2026-02-18T07:14:44.507Z",
   "createdAt": "2026-02-11T04:14:30.198Z",
   "id": "NKSgZKDRvHVY9U9VBm5mz",
   "name": "Extract_mail",
@@ -533,21 +533,20 @@
     },
     {
       "parameters": {
-        "model": "llama-3.3-70b-versatile",
         "options": {}
       },
-      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
       "typeVersion": 1,
       "position": [
         -576,
         384
       ],
-      "id": "a57161a0-e9c0-46d2-b615-f7826842be68",
-      "name": "Groq Chat Model",
+      "id": "e1408b19-c2ff-4b42-b446-611535fcdd62",
+      "name": "Google Gemini Chat Model",
       "credentials": {
-        "groqApi": {
-          "id": "1sIBxBc8FUC1uXVG",
-          "name": "Groq account"
+        "googlePalmApi": {
+          "id": "QYLHsZYZCnpLyrql",
+          "name": "Google Gemini(PaLM) Api account"
         }
       }
     }
@@ -645,7 +644,7 @@
         ]
       ]
     },
-    "Groq Chat Model": {
+    "Google Gemini Chat Model": {
       "ai_languageModel": [
         [
           {
@@ -667,8 +666,8 @@
     "templateCredsSetupCompleted": true
   },
   "pinData": {},
-  "versionId": "ed5df60c-3787-4ff8-922b-57d173c35bd1",
-  "activeVersionId": "ed5df60c-3787-4ff8-922b-57d173c35bd1",
+  "versionId": "2474f40c-7bec-4456-8dbb-c064332e04fe",
+  "activeVersionId": "2474f40c-7bec-4456-8dbb-c064332e04fe",
   "triggerCount": 2,
   "shared": [
     {
@@ -680,9 +679,9 @@
     }
   ],
   "activeVersion": {
-    "updatedAt": "2026-02-18T05:32:26.000Z",
-    "createdAt": "2026-02-18T05:32:14.042Z",
-    "versionId": "ed5df60c-3787-4ff8-922b-57d173c35bd1",
+    "updatedAt": "2026-02-18T07:14:47.000Z",
+    "createdAt": "2026-02-18T07:14:44.508Z",
+    "versionId": "2474f40c-7bec-4456-8dbb-c064332e04fe",
     "workflowId": "NKSgZKDRvHVY9U9VBm5mz",
     "nodes": [
       {
@@ -1212,21 +1211,20 @@
       },
       {
         "parameters": {
-          "model": "llama-3.3-70b-versatile",
           "options": {}
         },
-        "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+        "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
         "typeVersion": 1,
         "position": [
           -576,
           384
         ],
-        "id": "a57161a0-e9c0-46d2-b615-f7826842be68",
-        "name": "Groq Chat Model",
+        "id": "e1408b19-c2ff-4b42-b446-611535fcdd62",
+        "name": "Google Gemini Chat Model",
         "credentials": {
-          "groqApi": {
-            "id": "1sIBxBc8FUC1uXVG",
-            "name": "Groq account"
+          "googlePalmApi": {
+            "id": "QYLHsZYZCnpLyrql",
+            "name": "Google Gemini(PaLM) Api account"
           }
         }
       }
@@ -1324,7 +1322,7 @@
           ]
         ]
       },
-      "Groq Chat Model": {
+      "Google Gemini Chat Model": {
         "ai_languageModel": [
           [
             {
@@ -1337,11 +1335,11 @@
       }
     },
     "authors": "Veneeth Batchu",
-    "name": "Version ed5df60c",
+    "name": "Version 2474f40c",
     "description": "",
     "autosaved": true
   },
   "tags": [],
   "existsInGitHub": true,
-  "githubSha": "b3aa1179df244c5a10ac91650a931de8440c666b"
+  "githubSha": "399c44eacc9e057ede06a9de31bcd386de527a78"
 }
