@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-02-18T07:14:44.507Z",
+  "updatedAt": "2026-02-18T07:17:39.756Z",
   "createdAt": "2026-02-11T04:14:30.198Z",
   "id": "NKSgZKDRvHVY9U9VBm5mz",
   "name": "Extract_mail",
@@ -541,8 +541,8 @@
         -576,
         384
       ],
-      "id": "e1408b19-c2ff-4b42-b446-611535fcdd62",
-      "name": "Google Gemini Chat Model",
+      "id": "8b764a78-8376-4a50-8851-3f6cbe1839aa",
+      "name": "Google Gemini Chat Model1",
       "credentials": {
         "googlePalmApi": {
           "id": "QYLHsZYZCnpLyrql",
@@ -644,7 +644,7 @@
         ]
       ]
     },
-    "Google Gemini Chat Model": {
+    "Google Gemini Chat Model1": {
       "ai_languageModel": [
         [
           {
@@ -666,8 +666,8 @@
     "templateCredsSetupCompleted": true
   },
   "pinData": {},
-  "versionId": "2474f40c-7bec-4456-8dbb-c064332e04fe",
-  "activeVersionId": "2474f40c-7bec-4456-8dbb-c064332e04fe",
+  "versionId": "4dbf82f1-dc2d-4ea8-b550-095fa62e073b",
+  "activeVersionId": "4dbf82f1-dc2d-4ea8-b550-095fa62e073b",
   "triggerCount": 2,
   "shared": [
     {
@@ -679,9 +679,9 @@
     }
   ],
   "activeVersion": {
-    "updatedAt": "2026-02-18T07:14:47.000Z",
-    "createdAt": "2026-02-18T07:14:44.508Z",
-    "versionId": "2474f40c-7bec-4456-8dbb-c064332e04fe",
+    "updatedAt": "2026-02-18T07:17:42.000Z",
+    "createdAt": "2026-02-18T07:17:39.757Z",
+    "versionId": "4dbf82f1-dc2d-4ea8-b550-095fa62e073b",
     "workflowId": "NKSgZKDRvHVY9U9VBm5mz",
     "nodes": [
       {
@@ -1219,8 +1219,8 @@
           -576,
           384
         ],
-        "id": "e1408b19-c2ff-4b42-b446-611535fcdd62",
-        "name": "Google Gemini Chat Model",
+        "id": "8b764a78-8376-4a50-8851-3f6cbe1839aa",
+        "name": "Google Gemini Chat Model1",
         "credentials": {
           "googlePalmApi": {
             "id": "QYLHsZYZCnpLyrql",
@@ -1322,7 +1322,7 @@
           ]
         ]
       },
-      "Google Gemini Chat Model": {
+      "Google Gemini Chat Model1": {
         "ai_languageModel": [
           [
             {
@@ -1335,11 +1335,11 @@
       }
     },
     "authors": "Veneeth Batchu",
-    "name": "Version 2474f40c",
+    "name": "Version 4dbf82f1",
     "description": "",
     "autosaved": true
   },
   "tags": [],
   "existsInGitHub": true,
-  "githubSha": "399c44eacc9e057ede06a9de31bcd386de527a78"
+  "githubSha": "5003436acef17143136af33f0615bd71fed3429a"
 }
