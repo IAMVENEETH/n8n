@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-02-18T09:14:56.606Z",
+  "updatedAt": "2026-02-18T09:17:15.049Z",
   "createdAt": "2026-02-11T15:54:16.658Z",
   "id": "DRkxG3Wzq9tqxVXr-AOhW",
   "name": "GitHub Workflow Sync (v5)",
@@ -2131,6 +2131,35 @@
       ],
       "id": "af4fd7f0-0b4a-433c-b037-87a6542165a3",
       "name": "Loop Over Items"
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "Xf6LDtnYGZml6Iwz",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/Xf6LDtnYGZml6Iwz",
+          "cachedResultName": "spreadsheet"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "mode": "each",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.3,
+      "position": [
+        336,
+        4032
+      ],
+      "id": "a0b01259-f973-4ccb-bd81-97cac4cbfda4",
+      "name": "Call 'My Sub-Workflow 3'"
     }
   ],
   "connections": {
@@ -2955,10 +2984,27 @@
     },
     "Loop Over Items": {
       "main": [
-        [],
+        [
+          {
+            "node": "Call 'My Sub-Workflow 3'",
+            "type": "main",
+            "index": 0
+          }
+        ],
         [
           {
             "node": "HTTP Request2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create New File6": {
+      "main": [
+        [
+          {
+            "node": "Call 'My Sub-Workflow 3'",
             "type": "main",
             "index": 0
           }
@@ -2976,7 +3022,7 @@
     "templateCredsSetupCompleted": true
   },
   "pinData": {},
-  "versionId": "4656d836-796d-4a90-b831-aecaafac7153",
+  "versionId": "3129b794-3c7a-45c3-b026-ad9423b29282",
   "activeVersionId": "fc24041c-72fa-42f3-b981-96fb78b42cd5",
   "triggerCount": 8,
   "shared": [
@@ -5930,7 +5976,7 @@
   "tags": [],
   "existsInGitHub": true,
   "githubDownloadUrl": "https://raw.githubusercontent.com/IAMVENEETH/n8n/main/GitHub%20Workflow%20Sync%20(v5)",
-  "githubSha": "69bbaa38eae00a24566bc1f7323068433ad06991",
+  "githubSha": "91f0c4e7e4fb1b520cadf5c4f5e7631aa8c92af9",
   "shouldUpdate": true,
-  "githubUpdatedAt": "2026-02-18T09:10:44.998Z"
+  "githubUpdatedAt": "2026-02-18T09:14:56.606Z"
 }
