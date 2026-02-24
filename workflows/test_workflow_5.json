@@ -1,4 +1,62 @@
 {
-  "name":"test_workflow_5",
-  "message":"Hello Team"
+  "name": "test_workflow_5",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "start-node-001",
+      "name": "Start",
+      "type": "n8n-nodes-base.start",
+      "typeVersion": 1,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "webhook-test",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "id": "webhook-node-001",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [460, 300],
+      "webhookId": "abc12345-def6-7890-ghij-klmnopqrstuv"
+    },
+    {
+      "parameters": {
+        "functionCode": "return items.map(item => ({\n  json: {\n    message: 'Hello from test_workflow_5',\n    receivedData: item.json\n  }\n}));"
+      },
+      "id": "function-node-001",
+      "name": "Process Data",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [680, 300]
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Process Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner",
+    "errorWorkflow": "",
+    "timezone": "UTC"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2024-01-01T00:00:00.000Z",
+  "versionId": "v1"
 }
