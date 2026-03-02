@@ -1,0 +1,57 @@
+{
+  "name": "Example Manual Trigger Workflow",
+  "nodes": [
+    {
+      "parameters": {},
+      "name": "Manual Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        250,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "value": "Hello World",
+        "valueType": "string"
+      },
+      "name": "Set Value",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [
+        500,
+        300
+      ]
+    }
+  ],
+  "connections": {
+    "Manual Trigger": {
+      "main": [
+        [
+          {
+            "node": "Set Value",
+            "hopIndex": 0
+          }
+        ]
+      ]
+    }
+  },
+  "id": "an-example-workflow-id",
+  "active": false,
+  "createdAt": "2024-01-01T12:00:00.000Z",
+  "updatedAt": "2024-01-01T12:00:00.000Z",
+  "settings": {},
+  "staticData": null,
+  "meta": {
+    "editor": {
+      "mode": "design"
+    },
+    "instanceId": "instance-id-example"
+  },
+  "tags": [],
+  "credentialTemplates": [],
+  "saveDataConstructionData": [],
+  "saveDataAccountProfileId": "acc-profile-id-example",
+  "versionId": "version-id-example"
+}
