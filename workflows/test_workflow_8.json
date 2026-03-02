@@ -25,7 +25,7 @@
     },
     {
       "parameters": {
-        "functionCode": "return items.map(item => ({\n  json: {\n    message: 'Hello from test_workflow_5',\n    receivedData: item.json\n  }\n}));"
+        "functionCode": "return items.map(item => ({\n  json: {\n    message: 'Hello from test_workflow_8',\n    receivedData: item.json\n  }\n}));"
       },
       "id": "function-node-001",
       "name": "Process Data",
